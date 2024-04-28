@@ -75,7 +75,7 @@ public class TaskController {
 	}
 
     @Operation(summary = "Delete uma tarefa já existente")
-	@DeleteMapping(path = "/")
+	@DeleteMapping(path = "/{id}")
 	private ResponseEntity<Object> delete(Long id) {
 		try {
 			taskService.delete(id);
@@ -86,7 +86,7 @@ public class TaskController {
 	}
 
     @Operation(summary = "finaliza uma tarefa ou retira o status de finalizada")
-	@PutMapping(path = "/done")
+	@PutMapping(path = "/done/{id}")
 	private ResponseEntity<Object> done(Long id) {
 		try {
             if(id == null){

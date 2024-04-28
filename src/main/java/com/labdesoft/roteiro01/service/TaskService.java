@@ -29,7 +29,7 @@ public class TaskService {
 		if(taskToUpdate != null ) {
 			taskToUpdate.setDescription(task.getDescription());
 			taskToUpdate.setType(task.getType());
-			taskToUpdate.setCompleted(task.getCompleted());
+			taskToUpdate.setCompleted(task.isCompleted());
 			taskToUpdate.setPriority(task.getPriority());
 			taskToUpdate.setPriority(task.getPriority());
 			taskToUpdate.setPriority(task.getPriority());
@@ -46,7 +46,7 @@ public class TaskService {
     public Task complete(Long id) {
         Task task = taskRepository.findById(id).orElse(null);
         if(task != null ) {
-            if(task.getCompleted()){
+            if(task.isCompleted()){
                 task.setCompleted(false);
             }else{
                 task.setCompleted(true);
