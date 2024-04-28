@@ -28,7 +28,13 @@ public class TaskService {
 		
 		if(taskToUpdate != null ) {
 			taskToUpdate.setDescription(task.getDescription());
+			taskToUpdate.setType(task.getType());
 			taskToUpdate.setCompleted(task.getCompleted());
+			taskToUpdate.setPriority(task.getPriority());
+			taskToUpdate.setPriority(task.getPriority());
+			taskToUpdate.setPriority(task.getPriority());
+			taskToUpdate.setDate(task.getDate());
+			taskToUpdate.setDays(task.getDays());
 		}
 		return taskRepository.save(taskToUpdate);
 	}

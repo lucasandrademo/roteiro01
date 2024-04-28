@@ -44,7 +44,10 @@ public class TaskController {
 	@PostMapping(path = "/")
 	public ResponseEntity<Object> create(Task task) {
 		try {
-            if(task.getDescription() == null){
+            if(
+				task.getDescription() == null ||
+				task.getType() == null
+			){
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
 			return new ResponseEntity<Object>(taskService.create(task), HttpStatus.CREATED);
@@ -57,7 +60,12 @@ public class TaskController {
 	@PutMapping(path = "/")
 	private ResponseEntity<Object> update(Task task) {
 		try {
-            if(task.getDescription() == null || task.getId() == null){
+            if(
+				task.getDescription() == null ||
+				task.getType() == null ||
+				task.getPriority() == null ||
+				task.getId() == null
+			){
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
 			return new ResponseEntity<Object>(taskService.update(task), HttpStatus.OK);
