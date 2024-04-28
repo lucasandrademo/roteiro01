@@ -33,9 +33,10 @@ public class Task {
 
     private Integer days;
 
-    public Task(String description, Type type){
+    public Task(String description, Type type, Priority priority){
         this.description = description;
         this.type = type;
+        this.priority = priority;
     }
 
     @Override

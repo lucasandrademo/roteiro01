@@ -62,7 +62,8 @@ public class TaskController {
 		try {
             if(
 				task.getDescription() == null ||
-				task.getType() == null
+				task.getType() == null ||
+				task.getPriority() == null
 			){
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
