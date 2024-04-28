@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import com.labdesoft.roteiro01.service.TaskService;
 import com.labdesoft.roteiro01.entity.Task;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 import java.util.List;
 
@@ -40,9 +42,23 @@ public class TaskController {
         }
     }
 
+    @GetMapping("/{id}")
+    @Operation(summary = "trás dados de uma tarefa específica")
+    public ResponseEntity<Task> listOne(@PathVariable Long id) {
+        try{
+            Task task = taskService.findTaskById(id);;
+            if (task == null) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<Task>(task, HttpStatus.OK);
+        }catch(Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @Operation(summary = "Cria uma nova tarefa")
 	@PostMapping(path = "/")
-	public ResponseEntity<Object> create(Task task) {
+	public ResponseEntity<Object> create(@RequestBody Task task) {
 		try {
             if(
 				task.getDescription() == null ||
@@ -58,7 +74,7 @@ public class TaskController {
 
     @Operation(summary = "Atualiza uma tarefa já existente")
 	@PutMapping(path = "/")
-	private ResponseEntity<Object> update(Task task) {
+	private ResponseEntity<Object> update(@RequestBody Task task) {
 		try {
             if(
 				task.getDescription() == null ||
@@ -76,7 +92,7 @@ public class TaskController {
 
     @Operation(summary = "Delete uma tarefa já existente")
 	@DeleteMapping(path = "/{id}")
-	private ResponseEntity<Object> delete(Long id) {
+	private ResponseEntity<Object> delete(@PathVariable Long id) {
 		try {
 			taskService.delete(id);
 			return new ResponseEntity<Object>(HttpStatus.OK);
@@ -87,7 +103,7 @@ public class TaskController {
 
     @Operation(summary = "finaliza uma tarefa ou retira o status de finalizada")
 	@PutMapping(path = "/done/{id}")
-	private ResponseEntity<Object> done(Long id) {
+	private ResponseEntity<Object> done(@PathVariable Long id) {
 		try {
             if(id == null){
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

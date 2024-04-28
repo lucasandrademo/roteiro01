@@ -54,5 +54,9 @@ public class TaskService {
         }
         return taskRepository.save(task);
     }
+
+    public Task findTaskById(Long id) {
+        return taskRepository.findById(id).orElse(null);
+    }
     
 }
