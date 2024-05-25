@@ -1,1 +1,6 @@
-C:\Users\DaniBoy\Desktop\Roteiro-02-Lab-De-Software\src\test\java\com\labdesoft\roteiro01\Roteiro01ApplicationTests.java
+C:\Users\DaniBoy\Desktop\Roteiro-02-Lab-De-Software\roteiro03\src\test\java\com\labdesoft\roteiro01\unit\entity\TaskEntityTest.java
+C:\Users\DaniBoy\Desktop\Roteiro-02-Lab-De-Software\roteiro03\src\test\java\com\labdesoft\roteiro01\integration\TaskIntegrationTest.java
+C:\Users\DaniBoy\Desktop\Roteiro-02-Lab-De-Software\roteiro03\src\test\java\com\labdesoft\roteiro01\unit\service\TaskServiceTest.java
+C:\Users\DaniBoy\Desktop\Roteiro-02-Lab-De-Software\roteiro03\src\test\java\com\labdesoft\roteiro01\mock\TaskMock.java
+C:\Users\DaniBoy\Desktop\Roteiro-02-Lab-De-Software\roteiro03\src\test\java\com\labdesoft\roteiro01\unit\controller\TaskControllerTest.java
+C:\Users\DaniBoy\Desktop\Roteiro-02-Lab-De-Software\roteiro03\src\test\java\com\labdesoft\roteiro01\unit\repository\TaskRepositoryTest.java

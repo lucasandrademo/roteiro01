@@ -1,12 +1,14 @@
 package com.labdesoft.roteiro01.controller;
 
-import java.util.List;
-import java.util.Optional;
+import com.labdesoft.roteiro01.entity.Priority;
+import com.labdesoft.roteiro01.entity.Task;
+import com.labdesoft.roteiro01.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.labdesoft.roteiro01.entity.*;
-import com.labdesoft.roteiro01.service.TaskService;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/tasks")
@@ -43,11 +45,7 @@ public class TaskController {
     @GetMapping("/{id}")
     public ResponseEntity<Task> getTaskById(@PathVariable Long id) {
         Optional<Task> task = taskService.findTaskById(id);
-        if (task.isPresent()) {
-            return ResponseEntity.ok(task.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return task.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{taskId}/priority/{priority}")
