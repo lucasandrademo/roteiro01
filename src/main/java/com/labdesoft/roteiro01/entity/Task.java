@@ -1,49 +1,53 @@
 package com.labdesoft.roteiro01.entity;
 
 import java.time.LocalDate;
-
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-
-import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.persistence.Transient;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Entity
 @Data
-@Schema(description = "Todos os detalhes sobre uma tarefa. ")
+@Schema(description = "Todos os detalhes sobre uma tarefa.")
 public class Task {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	private String description;
+    private String description;
 
-	private Boolean completed;
-    
-    private Type type;
+    private TaskType type;
+
+    @FutureOrPresent(message = "A data prevista de execução deve ser igual ou superior à data atual.")
+    private LocalDate dueDate;
+
+    private Integer dueDays;
 
     private Priority priority;
 
-    @FutureOrPresent(message = "Data superior a data de hoje")
-    private LocalDate date;
+    @Transient
+    private TaskStatus status;
 
-    private Integer days;
+    // Construtores
+    public Task() {
+    }
 
-    public Task(String description, Type type, Priority priority){
+    public Task(String description, TaskType type,
+            @FutureOrPresent(message = "A data prevista de execução deve ser igual ou superior à data atual.") LocalDate dueDate,
+            Integer dueDays, Priority priority) {
         this.description = description;
         this.type = type;
+        this.dueDate = dueDate;
+        this.dueDays = dueDays;
         this.priority = priority;
     }
 
-    @Override
-    public String toString() {
-        return "Task [id=" + id + ", description=" + description + ", completed=" + completed + "]";
-    }
-
+    // Getters e Setters
     public Long getId() {
         return id;
     }
@@ -60,44 +64,43 @@ public class Task {
         this.description = description;
     }
 
-    public boolean isCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
-    }
-
-    public Type getType(){
+    public TaskType getType() {
         return type;
     }
 
-    public void setType(Type type){
+    public void setType(TaskType type) {
         this.type = type;
     }
 
-    public Priority getPriority(){
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public Integer getDueDays() {
+        return dueDays;
+    }
+
+    public void setDueDays(Integer dueDays) {
+        this.dueDays = dueDays;
+    }
+
+    public Priority getPriority() {
         return priority;
     }
 
-    public void setPriority(Priority priority){
+    public void setPriority(Priority priority) {
         this.priority = priority;
     }
 
-    public LocalDate getDate(){
-        return date;
+    public TaskStatus getStatus() {
+        return status;
     }
 
-    public void setDate(LocalDate date){
-        this.date = date;
+    public void setStatus(TaskStatus status) {
+        this.status = status;
     }
-
-    public Integer getDays(){
-        return days;
-    }
-
-    public void setDays(Integer days){
-        this.days = days;
-    }
-       
 }
