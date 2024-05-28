@@ -1,6 +1,6 @@
 FROM ubuntu:latest as build
-# Daniel
-LABEL authors="Lucas Machado"
+# Lucas
+LABEL authors="Lucas Andrade"
 RUN apt-get update
 RUN apt-get install openjdk-17-jdk -y
 
