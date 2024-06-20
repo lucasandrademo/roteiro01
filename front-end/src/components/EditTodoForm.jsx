@@ -28,6 +28,7 @@ export const EditTodoForm = ({ task, saveTodo, open, onClose }) => {
       priority,
       dueDate: type === "DATA" ? dueDate : type === "PRAZO" ? new Date(Date.now() + dueDays * 24 * 60 * 60 * 1000).toISOString().split('T')[0] : null,
       dueDays: type === "PRAZO" ? dueDays : null,
+      status: task.status
     };
 
     try {

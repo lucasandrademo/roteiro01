@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { TodoForm } from "./TodoForm";
 import { TodoList } from "./TodoList";
 import todoService from '../services/todoService';
-import { Button, Typography } from "@mui/material";
+import { Button, Grid, Card, CardContent, Typography } from "@mui/material";
 
 export const TodoWrapper = () => {
   const [todos, setTodos] = useState([]);
@@ -33,7 +33,7 @@ export const TodoWrapper = () => {
   const deleteTodo = async (id) => {
     try {
       await todoService.deleteTodo(id);
-      await fetchTodos(); // Recarregar os dados após a exclusão
+      await fetchTodos();
     } catch (error) {
       console.error('Erro ao excluir a tarefa:', error);
     }
@@ -50,7 +50,7 @@ export const TodoWrapper = () => {
   const saveTodo = async (id, updatedTask) => {
     try {
       await todoService.updateTodo(id, updatedTask);
-      await fetchTodos(); // Recarregar os dados após a atualização
+      await fetchTodos();
     } catch (error) {
       console.error('Erro ao atualizar a tarefa:', error);
     }
@@ -61,19 +61,39 @@ export const TodoWrapper = () => {
       <Typography variant="h3" component="h2">
         Lista de Tarefas
       </Typography>
-      <Button variant="contained" color="primary" onClick={() => setIsTodoFormOpen(true)}>
-        Adicionar Tarefa
-      </Button>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={6} md={4}>
+          <Card
+            sx={{
+              marginBottom: 2,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: 350,
+              borderColor: 'primary.main',
+              borderWidth: 2,
+              borderStyle: 'dashed',
+              backgroundColor: 'rgba(0, 0, 255, 0.05)',
+            }}
+          >
+            <CardContent>
+              <Button variant="contained" color="primary" onClick={() => setIsTodoFormOpen(true)}>
+                Adicionar Tarefa
+              </Button>
+            </CardContent>
+          </Card>
+        </Grid>
+        {todos.map((todo) => (
+          <TodoList
+            key={todo.id}
+            task={todo}
+            deleteTodo={deleteTodo}
+            editTodo={editTodo}
+            saveTodo={saveTodo}
+          />
+        ))}
+      </Grid>
       <TodoForm addTodo={addTodo} open={isTodoFormOpen} onClose={() => setIsTodoFormOpen(false)} />
-      {todos.map((todo) => (
-        <TodoList
-          key={todo.id}
-          task={todo}
-          deleteTodo={deleteTodo}
-          editTodo={editTodo}
-          saveTodo={saveTodo}
-        />
-      ))}
     </div>
   );
 };
