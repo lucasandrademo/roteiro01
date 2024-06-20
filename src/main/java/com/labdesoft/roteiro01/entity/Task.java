@@ -37,13 +37,12 @@ public class Task {
 
     public Task(String description, TaskType type,
             @FutureOrPresent(message = "A data prevista de execução deve ser igual ou superior à data atual.") LocalDate dueDate,
-            Integer dueDays, Priority priority, TaskStatus status) {
+            Integer dueDays, Priority priority) {
         this.description = description;
         this.type = type;
         this.dueDate = dueDate;
         this.dueDays = dueDays;
         this.priority = priority;
-        this.status = status;
     }
 
     // Getters e Setters
