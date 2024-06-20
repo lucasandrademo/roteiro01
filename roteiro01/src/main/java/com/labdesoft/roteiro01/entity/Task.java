@@ -6,7 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.persistence.Transient;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -30,7 +29,6 @@ public class Task {
 
     private Priority priority;
 
-    @Transient
     private TaskStatus status;
 
     // Construtores
